@@ -6,26 +6,7 @@ WORLD MAP
 -do math to find out percentages for each cell sprite image length&width %
 -on key press
 
-row1=1-20
-row2=21-40
-row3=41-60
-row4=61-80
-row5=81-100
-row6=101-120
-row7=121=140
-row8=141-160
-row9=161-180
-row10=181-200
-row11=201-220
-row12=221-240
-row13=241-260
-row14=261-280
-row15=281-300
-row16=301=320
-row17=321-340
-row18=341-360
-row19=361-380
-row20=381-400
+
 
 
 COMBAT MECHANICS

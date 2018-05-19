@@ -1,6 +1,10 @@
 /*body{background-image:url("../images/Untitled.png");
     background-repeat: no-repeat;
     background-size: 100% 100%}*/
+h1{
+    font-size:40px;
+}
+
 div{height:5%;
     width: 2.5%;
 float:left;}
@@ -82,10 +86,21 @@ margin-top:2%;}
             border-style:solid;
             border-color:lightgreen;
         margin-left:5%;
-        margin-top:5%;}
+        margin-top:2%;}
 
+.eventtitle{height:5%;
+            width:30%;
+            margin:0 auto;
+            border-width:1px;
+            border-style:solid;
+            border-color:lightgreen;
+            
+            }
 
+.playerhealth{float:left;}
 
+.choicetext{color:white;}
+.choicetext:hover{background-color:teal;}
 .testgrid{border-width:1px;
             border-style:solid;
             border-color:black;}

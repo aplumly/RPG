@@ -18,9 +18,33 @@ var gridcheck;
 var event = false;
 var event_box;
 var choice_box;
+var choice_text;
 var message_box;
 var animation_box;
-var choice;
+var event_title;
+var choice=0;
+var choices = new Array();
+var event_type=0;
+var player= {
+    hp:35,
+    constitution:35,
+    strength:3,
+    defense:1,
+    dexterity:1,
+    magic:1,
+    speed:2
+
+};
+var pirate= {
+    hp:30,
+    constitution:30,
+    strength:2,
+    defense:1,
+    dexterity:3,
+    magic:1,
+    speed:2
+};
+
 //on ready
     // when everything is coming together make a "press space to start screen"
     //function to fill the game world with *pixels* (40x20) done
@@ -44,8 +68,13 @@ var choice;
     playerposid = "#pos"+player_position;
     
 
-    function event_screen()
+    function dice(x)
     {
+        return Math.floor(math.random()*x);
+    }
+
+    function event_screen()
+    {   
         event_box= $("<section>");
         event_box.addClass("eventbox");
         //event_box.text("event box");
@@ -62,6 +91,10 @@ var choice;
         animation_box.addClass("animationbox");
         animation_box.text("animations go here");
         $(".eventbox").prepend(animation_box);
+        event_title = $("<section>");
+        event_title.addClass("eventtitle");
+        event_title.html("<h1 style=\"text-align:center\">event title</h1>");
+        $(".eventbox").prepend(event_title);
 
     }
 
@@ -77,13 +110,27 @@ var choice;
 
     function echeck(x)
     {   console.log(x)
-       
+       let temp;
         //northernmost hideout
         if(x==221){
             console.log("trigger event");
+            event_type=1;
             event=true;
             event_screen();
-            
+            event_title.html("<h1 style=\"text-align:center\">PIRATE COVE</h1>");
+            choices.push("approach","leave");
+            choice_box.empty();
+            for(let i=0;i<choices.length;i++)
+            {   choice_text = $("<p>");
+                choice_text.addClass("choicetext");
+                choice_text.text(choices[i]);
+                choice_text.attr("id","choice"+i);
+                choice_box.append(choice_text);
+            }
+            choice=0;
+            temp = "#choice0";
+            $(temp).css({"background-color":"teal"});
+
         }
         //mountainside hideout
         if(x==441){
@@ -150,10 +197,62 @@ var choice;
     }
 
     function rm_eventbox()
-    {
+    {   message_box.empty();
+        choice_box.empty();
+        animation_box.empty();
+        event_title.empty();
         event_box.empty();
         event_box.remove();
+        event=false;
+        choices.length=0;
+        event_type=0;
     }
+
+    function battle(x)
+    {   choice_box.empty();
+        choices.length=0;
+        choices.push("attack","flee");
+
+        for(let i=0;i<choices.length;i++)
+        {   choice_text = $("<p>");
+            choice_text.addClass("choicetext");
+            choice_text.text(choices[i]);
+            choice_text.attr("id","choice"+i);
+            choice_box.append(choice_text);
+        }
+        choice=0;
+        temp = "#choice0";
+        $(temp).css({"background-color":"teal"});
+        
+        if(event_type==1)
+        {  
+            //message box text describing the scenario
+            //create an "active enemies" array set to desired opponents
+            
+        }
+    }
+
+    //attack function
+    /*function attack(desired enemy) 
+    {
+        
+    }
+    
+    */
+
+    function handle_choice(x)
+    {   
+        if($(x).text()=="leave"){rm_eventbox();}
+        if($(x).text()=="approach"){battle(x);}
+        //if($(x).text()=="trade"){}
+        //if($(x).text()=="purchase healing"){}
+        if($(x).text()=="attack"){/*attack()*/}
+        //if($(x).text()=="flee"){}
+
+    }
+
+
+
 
 
     //get key input
@@ -162,7 +261,7 @@ var choice;
         //press i for inventory
         //press j for journal
         $(document).keyup(function(e) {
-            
+            let temp;
             if(event==false){
             switch (e.which) {
             // space button
@@ -213,14 +312,42 @@ var choice;
       
             default:
               break;
-            }}else{
+            }}else{//event box logic
+                temp = "#choice"+choice;
+                $(temp).css({"background-color":"black"});
                 switch(e.which){
                     case 27: 
                     rm_eventbox();
                     event=false;
+                    //space key(will be used to select)
+                    case 32:
+                    handle_choice(temp);
+                    break;
+                    //down arrow
+                    case 40:
+                    //if(choice<=0){break;}
+                    if(choice>choices.length){break;}
+                    choice++;
+                    break;
+                    //right arrow
+                    case 39:
+                    break;
+                   
+                    //up arrow
+                    case 38: 
+                    if(choice<=0){break;}
+                    choice--;
+                    break;
+                    //left arrow
+                    case 37:
+                    break;
+
+
                     break;
                     default: break;
                 }
+                temp = "#choice"+choice;
+                $(temp).css({"background-color":"teal"});
             }
             //console.log(playerposid);
             //console.log(player_position);
@@ -230,7 +357,13 @@ var choice;
 
 
 
-    
+    /*$(".choice_text").on("click","#leave", function(){
+        message_box.empty();
+        choice_box.empty();
+        animation_box.empty();
+        rm_eventbox();
+
+    });*/
     //function for interacting, pull up large ... absolute pos div that acts as game screen
         //get key or button input to talk, fight, and interact with the scenario
         //wire buttons to game logic*rolls damage etc*
