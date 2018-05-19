@@ -4,7 +4,10 @@
 //              stats:
 //              hp:
 //              others: }
-
+    function dice(x)
+    {
+        return Math.floor(Math.random()*x);
+    }
 //array for storing pixel data
 //
 //
@@ -25,6 +28,7 @@ var event_title;
 var choice=0;
 var choices = new Array();
 var event_type=0;
+var active_enemies = new Array();
 var player= {
     hp:35,
     constitution:35,
@@ -32,7 +36,13 @@ var player= {
     defense:1,
     dexterity:1,
     magic:1,
-    speed:2
+    speed:2,
+    money:0,
+    attack:function(x)
+    {
+        let dmg = this.strength+dice(8);
+        x.hp = x.hp-dmg;
+    }
 
 };
 var pirate= {
@@ -42,7 +52,12 @@ var pirate= {
     defense:1,
     dexterity:3,
     magic:1,
-    speed:2
+    speed:2,
+    attack:function(x)
+    {
+        let dmg = this.strength+dice(8);
+        x.hp= x.hp-dmg;
+    }
 };
 
 //on ready
@@ -68,10 +83,7 @@ var pirate= {
     playerposid = "#pos"+player_position;
     
 
-    function dice(x)
-    {
-        return Math.floor(math.random()*x);
-    }
+
 
     function event_screen()
     {   
@@ -221,32 +233,65 @@ var pirate= {
             choice_box.append(choice_text);
         }
         choice=0;
-        temp = "#choice0";
+        let temp = "#choice0";
         $(temp).css({"background-color":"teal"});
-        
+        //pirate cove
         if(event_type==1)
-        {  
+        {  //hp boxes
+            temp = "your hp: "+player.hp+"                    pirate hp:"+pirate.hp;
+            animation_box.text(temp);
             //message box text describing the scenario
+            message_box.html("you enter the pirates lair...<br> you are attacked and must fight for your life!");
             //create an "active enemies" array set to desired opponents
-            
+            active_enemies.push(pirate);
         }
     }
 
-    //attack function
-    /*function attack(desired enemy) 
-    {
+    function win()
+    {   //pirate cove
+        if(event_type==1)
+        {   player.money+=100;
+            active_enemies.length=0;
+            choices.length=0;
+            choice_box.empty();
+            console.log(choices);
+            choices.push("leave");
+            for(let i=0;i<choices.length;i++)
+            {   choice_text = $("<p>");
+                choice_text.addClass("choicetext");
+                choice_text.text(choices[i]);
+                choice_text.attr("id","choice"+i);
+                choice_box.append(choice_text);
+            }
+            message_box.html("you've bested the pirate and now you take his treasure!")
+        }
+
         
     }
+
+
+
     
-    */
+    function attack() 
+    {   let temp;
+        
+        player.attack(active_enemies[0]);
+        active_enemies[0].attack(player);
+        if(active_enemies[0].hp<1){active_enemies[0].hp=0;win();}
+        temp = "your hp: "+player.hp+"            pirate hp:"+ pirate.hp;
+        animation_box.text(temp);
+    }
+    
+    
 
     function handle_choice(x)
     {   
         if($(x).text()=="leave"){rm_eventbox();}
         if($(x).text()=="approach"){battle(x);}
         //if($(x).text()=="trade"){}
+        //if($(x).text()=="talk"){}
         //if($(x).text()=="purchase healing"){}
-        if($(x).text()=="attack"){/*attack()*/}
+        if($(x).text()=="attack"){attack();}
         //if($(x).text()=="flee"){}
 
     }
