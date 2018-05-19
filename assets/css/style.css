@@ -4,27 +4,45 @@
 div{height:5%;
     width: 2.5%;
 float:left;}
-.mountain{background-color: grey;}
-.water{background-color:blue;}
-.grass{background-color:lightgreen;}
-.forest{background-color:green;}
-.trader1{background-color:brown;}
-.trader2{background-color:brown;}
-.cave{background-color:black;}
-.river{background-color:lightblue;}
-.enemyhideout1{background-color:red;}
-.enemyhideout2{background-color:red;}
-.enemyhideout3{background-color:red;}
-.enemyhideout4{background-color:red;}
-.quest{background-color:purple;}
-.sidequest{background-color:lavender;}
-.healer{background-color:yellow;}
-.playerstart{background-color:pink;}
-.port{background-color:brown;}
-.bridge{background-color:brown;}
-.playersprite{z-index:3;
-                height:4%;
-            width: 1.8%;
+.mountain{background-color: grey;
+z-index:0;}
+.water{background-color:blue;
+z-index:0;}
+.grass{background-color:lightgreen;
+    z-index:0;}
+.forest{background-color:green;
+    z-index:0;}
+.trader1{background-color:brown;
+    z-index:0;}
+.trader2{background-color:brown;
+    z-index:0;}
+.cave{background-color:black;
+    z-index:0;}
+.river{background-color:lightblue;
+    z-index:0;}
+.enemyhideout1{background-color:red;
+    z-index:0;}
+.enemyhideout2{background-color:red;
+    z-index:0;}
+.enemyhideout3{background-color:red;
+    z-index:0;}
+.enemyhideout4{background-color:red;
+    z-index:0;}
+.quest{background-color:purple;
+    z-index:0;}
+.sidequest{background-color:lavender;
+    z-index:0;}
+.healer{background-color:yellow;
+    z-index:0;}
+.playerstart{background-color:pink;
+    z-index:0;}
+.port{background-color:brown;
+    z-index:0;}
+.bridge{background-color:brown;
+    z-index:0;}
+.playersprite{z-index:2;
+               height:100%;
+            width: 80%;
             }
 
 .testgrid{border-width:1px;
