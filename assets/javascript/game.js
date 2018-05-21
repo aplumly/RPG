@@ -12,10 +12,11 @@
 //
 //
 //var pixels = new Array([],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[])
+var b=0;
 var pixels = new Array("mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","water","water","water","water","water","water","water","water","water","water","water","mountain","cave","grass","grass","forest","mountain","mountain","forest","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","water","water","water","water","water","water","water","water","water","water","water","mountain","mountain","grass","grass","forest","forest","mountain","forest","forest","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","mountain","water","water","water","water","water","water","water","water","mountain","water","water","water","water","water","water","water","water","water","water","water","mountain","mountain","grass","grass","grass","forest","mountain","forest","forest","forest","forest","forest","mountain","mountain","mountain","mountain","river","mountain","mountain","mountain","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","mountain","forest","grass","grass","grass","forest","mountain","forest","forest","forest","forest","forest","forest","forest","forest","forest","river","forest","forest","forest","forest","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","mountain","sidequest","grass","grass","grass","grass","forest","forest","forest","forest","forest","forest","forest","forest","forest","forest","river","forest","forest","forest","forest","pirate cove","grass","grass","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","water","mountain","forest","grass","grass","grass","grass","forest","forest","forest","forest","necromancer's thicket","grass","grass","grass","grass","grass","river","grass","grass","forest","forest","forest","grass","grass","grass","grass","water","water","water","water","water","water","water","water","water","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","forest","grass","grass","grass","grass","grass","river","grass","grass","grass","forest","forest","forest","forest","grass","grass","water","water","water","water","water","water","water","water","water","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","forest","river","river","river","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water","water","water","water","water","water","water","water","water","water","mountain","mountain","grass","grass","forest","haunted graveyard","grass","grass","grass","grass","grass","forest","grass","grass","grass","grass","grass","grass","river","river","river","grass","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water","water","water","water","water","water","water","mountain","forest","grass","grass","grass","forest","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","river","river","bridge","river","river","river","river","grass","grass","grass","grass","water","water","water","water","water","water","water","water","water","mountain","rock golem quary","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","quest","river","river","river","river","river","river","water","water","water","water","water","water","water","water","mountain","forest","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","trader1","water","water","water","water","water","mountain","forest","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","trader2","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","port","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","healer","grass","grass","grass","grass","grass","grass","grass","grass","grass","playerstart","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water","mountain","mountain","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","grass","water","water","water","water","water");
 var asset_types = new Array("mountain","grass","forest","river","water","bridge","port","healer","playerstart","enemyhideout1","enemyhideout2","enemyhideout3","enemyhideout4","quest","sidequest","trader1","trader2","cave");
 var impassable_types = new Array("mountain","water","river");
-var event_types= new Array("healer","playerstart","rock golem quary","haunted graveyard","pirate cove","necromancer's thicket","quest","sidequest","trader1","trader2","cave");
+var event_types= new Array("healer","port","playerstart","rock golem quary","haunted graveyard","pirate cove","necromancer's thicket","quest","sidequest","trader1","trader2","cave");
 var event_combat= new Array("rock golem quary","haunted graveyard","pirate cove","necromancer's thicket")
 var estate = new Array();
 var estateid= new Array();
@@ -67,7 +68,7 @@ var player= {
         active_friends.push(rockgolem)
         m=true;
     }
-    if(m=true){player.book=0;}
+    if(m=true){player.book=false;}
 
     },
 
@@ -401,7 +402,7 @@ var rockgolem = {
         if(event_type=="rock golem quary")
         {
             //hp boxes
-            temp = "your hp: "+player.hp+"                    rock golem hp:"+necromancer.hp;
+            temp = "your hp: "+player.hp+"                    rock golem hp:"+rockgolem.hp;
             animation_box.text(temp);
              //message box text describing the scenario
             message_box.html("THUD THUD THUD.... a rock golem begins to throw rocks at you!");
@@ -411,7 +412,7 @@ var rockgolem = {
         if(event_type=="haunted graveyard")
         {
              //hp boxes
-            temp = "your hp: "+player.hp+"                    ghost hp:"+necromancer.hp;
+            temp = "your hp: "+player.hp+"                    ghost hp:"+ghost.hp;
             animation_box.text(temp);
             //message box text describing the scenario
             message_box.html("you walk around the spooky graveyard... <br> an angry spirit attacks you!");
@@ -423,7 +424,7 @@ var rockgolem = {
     function win()
     {   //pirate cove
         if(event_type=="pirate cove")
-        {   player.money+=1000;
+        {   player.money+=100;
             player.silversword=1;
             active_enemies.length=0;
             choices.length=0;
@@ -431,7 +432,7 @@ var rockgolem = {
             console.log(choices);
             choices.push("leave");
             update_choices();
-            message_box.html("you've bested the pirate and now you take his treasure!")
+            message_box.html("you've bested the pirate and now you take his treasure!");
         }
 
         if(event_type=="necromancer's thicket")
@@ -442,16 +443,30 @@ var rockgolem = {
             console.log(choices);
             choices.push("leave");
             update_choices();
-            message_box.html("you've bested the necromancer and take his book!")
+            message_box.html("you've bested the necromancer and take his book!");
             
         }
         if(event_type=="haunted graveyard")
         {
-            rm_eventbox();
+            
+            active_enemies.length=0;
+            choices.length=0;
+            choice_box.empty();
+            console.log(choices);
+            choices.push("leave");
+            update_choices();
+            message_box.html("you've put the restless spirit to rest");
         }
-        if(event_type=="rock golem")
-        {
-            rm_eventbox();
+        if(event_type=="rock golem quary")
+        {   
+            
+            active_enemies.length=0;
+            choices.length=0;
+            choice_box.empty();
+            console.log(choices);
+            choices.push("leave");
+            update_choices();
+            message_box.html("you smash the rock golem into a million pebbles");
         }
 
     }
@@ -486,18 +501,25 @@ var rockgolem = {
         animation_box.text(temp);
     }
     
-    
+    function healer()
+    {   choices.length=0;
+        choices.push("purchase healing","leave");
+        update_choices();
+        message_box.text("healer: i can heal you, but my coin pouch is looking a bit light... it'll cost you 100 gold pieces.\nyou have: "+player.money+"gold pieces\n");
+
+    }
 
     function handle_choice(x)
     {   
-        if($(x).text()=="leave"){rm_eventbox();}
-        if($(x).text()=="approach"){if(event_combat.some(arrVal => event_type === arrVal)) battle(x);}
+        if($(x).text()=="leave"){rm_eventbox();b=0;}
+        if($(x).text()=="approach"){if(event_combat.some(arrVal => event_type === arrVal)) {battle(x);}
+        if(event_type=="healer"){healer();}}
         //if($(x).text()=="trade"){}
         //if($(x).text()=="talk"){}
-        //if($(x).text()=="purchase healing"){}
+        if($(x).text()=="purchase healing"){console.log("healing triggered"+b);b++;if(b>1){if(player.money>=100){player.money=player.money-100;player.hp=player.constitution;message_box.text("you have healed yourself and now have "+player.money+" coins");}else{choices.length=0;choices.push("leave");update_choices(); message_box.text("you dont' have enough money");}}}
         if($(x).text()=="attack"){attack();}
         if($(x).text()=="flee"){flee();}
-        if($(x).text()=="necromancy"){player.necromancy();update_choices();active_enemies[0].attack(player);}
+        if($(x).text()=="necromancy"){player.necromancy();choices.length=2;update_choices();active_enemies[0].attack(player);}
         choice=0;
     }
 
