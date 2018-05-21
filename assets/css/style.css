@@ -24,13 +24,13 @@ z-index:0;}
     z-index:0;}
 .river{background-color:lightblue;
     z-index:0;}
-.enemyhideout1{background-color:red;
+.pirate{background-color:red;
     z-index:0;}
-.enemyhideout2{background-color:red;
+.thicket{background-color:red;
     z-index:0;}
-.enemyhideout3{background-color:red;
+.rock{background-color:red;
     z-index:0;}
-.enemyhideout4{background-color:red;
+.haunted{background-color:red;
     z-index:0;}
 .quest{background-color:purple;
     z-index:0;}
@@ -100,7 +100,7 @@ margin-top:2%;}
 .playerhealth{float:left;}
 
 .choicetext{color:white;}
-.choicetext:hover{background-color:teal;}
+
 .testgrid{border-width:1px;
             border-style:solid;
             border-color:black;}

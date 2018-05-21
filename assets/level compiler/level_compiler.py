@@ -125,13 +125,13 @@ for y in range(20):
         if pix[x,y]==ps:
             fil.write("\"playerstart\",")
         if pix[x,y]==eh1:
-            fil.write("\"enemyhideout1\",")
+            fil.write("\"rock golem quary\",")
         if pix[x,y]==eh2:
-            fil.write("\"enemyhideout2\",")
+            fil.write("\"pirate cove\",")
         if pix[x,y]==eh3:
-            fil.write("\"enemyhideout3\",")
+            fil.write("\"necromancer's thicket\",")
         if pix[x,y]==eh4:
-            fil.write("\"enemyhideout4\",")
+            fil.write("\"haunted graveyard\",")
         if pix[x,y]==q:
             fil.write("\"quest\",")
         if pix[x,y]==sq:

@@ -28,3 +28,9 @@ COMBAT MECHANICS
 -archery base hit is determined by dexterity
 -magic success chance is determined by magic lvl. combat magic has unique damage ranges, and there are spells like sleep, root, freeze, etc
     *magic attack succeeds if roll is lower than magic bonus
+
+
+
+    
+
+
