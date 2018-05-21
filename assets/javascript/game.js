@@ -494,10 +494,10 @@ var rockgolem = {
     {   let temp;
         
         player.attack(active_enemies[0]);
-        if(active_enemies[0].hp<1){active_enemies[0].hp=0;win();}
-        active_enemies[0].attack(player);
-        if(player.hp<1){player.hp=0;lose();}
+        if(active_enemies[0].hp>0){active_enemies[0].attack(player);}
         temp = "your hp: "+player.hp+"            enemies hp:"+ active_enemies[0].hp;
+        if(active_enemies[0].hp<1){active_enemies[0].hp=0;win();}
+        if(player.hp<1){player.hp=0;lose();}
         animation_box.text(temp);
     }
     
@@ -517,7 +517,7 @@ var rockgolem = {
         //if($(x).text()=="trade"){}
         //if($(x).text()=="talk"){}
         if($(x).text()=="purchase healing"){console.log("healing triggered"+b);b++;if(b>1){if(player.money>=100){player.money=player.money-100;player.hp=player.constitution;message_box.text("you have healed yourself and now have "+player.money+" coins");}else{choices.length=0;choices.push("leave");update_choices(); message_box.text("you dont' have enough money");}}}
-        if($(x).text()=="attack"){attack();}
+        if($(x).text()=="attack"){b++;if(b>1){attack();}}
         if($(x).text()=="flee"){flee();}
         if($(x).text()=="necromancy"){player.necromancy();choices.length=2;update_choices();active_enemies[0].attack(player);}
         choice=0;
