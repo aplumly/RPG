@@ -543,7 +543,7 @@ var rockgolem = {
 
     function attack() 
     {   let temp;
-        
+        message_box.empty();
         player.attack(active_enemies[0]);
         if(active_enemies[0].hp>0){active_enemies[0].attack(player);}
         temp = "your hp: "+player.hp+"            enemies hp:"+ active_enemies[0].hp;
