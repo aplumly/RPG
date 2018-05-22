@@ -528,7 +528,10 @@ var rockgolem = {
         if(player.hp<1){player.hp=0;lose();}
         animation_box.text(temp);
     }
-    
+    function hpbar()
+    {   
+
+    }
     function healer()
     {   choices.length=0;
         choices.push("purchase healing","leave");
