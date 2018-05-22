@@ -36,34 +36,38 @@ var event_type=0;
 var active_enemies = new Array();
 var active_friends = new Array();
 var player= {
+    name:"player name variable",
     hp:50,
     constitution:50,
     strength:3,
     defense:1,
-    dexterity:1,
+    dexterity:3,
     magic:1,
     speed:2,
-    money:0,
+    money:100,
     silversword:0,
     book:false,
     attack:function(x)
-    {
-        let dmg = this.strength+dice(8);
-        x.hp = x.hp-dmg;
+    {   let c=dice(16);
+        if(c==15){c=16;message_box.append("you rolled a crit");}
+        if(c<=x.defense){message_box.append("<p>your attack was blocked</p>")}else{
+        let dmg = this.strength+dice(c);let temp="<p>you hit "+x.name+" for "+dmg+" dmg.</p>";
+        message_box.append(temp);
+        x.hp = x.hp-dmg;}
     },
     necromancy()
     {   let m;
-    if(pirate.hp=0){
+    if(pirate.hp==0){
         pirate.hp=pirate.constitution;
         active_friends.push(pirate);
         m=true;
     }
-    if(necromancer.hp=0){
+    if(necromancer.hp==0){
         necromancer.hp=necromancer.constitution;
         active_friends.push(necromancer);
         m=true;
     }
-    if(rockgolem.hp=0){
+    if(rockgolem.hp==0){
         rockgolem.hp=rockgolem.constitution;
         active_friends.push(rockgolem)
         m=true;
@@ -74,6 +78,7 @@ var player= {
 
 };
 var pirate= {
+    name:"pirate",
     hp:30,
     constitution:30,
     strength:2,
@@ -83,12 +88,16 @@ var pirate= {
     speed:2,
     attack:function(x)
     {
-
-        let dmg = this.strength+dice(8);
-        x.hp= x.hp-dmg;
+        let c=dice(16);
+        if(c==15){c=16;message_box.append(this.name+" rolled a crit");}
+        if(c<=x.defense){message_box.append("<p>pirate's attack was blocked</p>")}else{
+        let dmg = this.strength+dice(c);let temp="<p>"+this.name+ " hit "+x.name+" for "+dmg+" dmg.</p>";
+        message_box.append(temp);
+        x.hp = x.hp-dmg;}
     }
 };
 var necromancer= {
+    name:"necromancer",
     hp:60,
     constitution:60,
     strength:1,
@@ -97,53 +106,68 @@ var necromancer= {
     magic:6,
     speed:3,
     attack:function(x)
-    {
-        let dmg = this.strength+dice(8);
-        x.hp= x.hp-dmg;
+    {   let c=dice(16);
+        if(c==15){c=16;message_box.append(this.name+" rolled a crit");}
+        if(c<=x.defense){message_box.append("<p>necromancer's attack was blocked</p>")}else{
+        let dmg = this.strength+dice(c);let temp="<p>"+this.name+ " hit "+x.name+" for "+dmg+" dmg.</p>";
+        message_box.append(temp);
+        x.hp = x.hp-dmg;}
     }
 };
 
 var ghost={
+    name:"ghost",
     hp:45,
-    constitution:60,
+    constitution:45,
     strength:1,
     defense:1,
     dexterity:3,
     magic:6,
     speed:3,
     attack:function(x)
-    {
-        let dmg = this.strength+dice(8);
-        x.hp= x.hp-dmg;
+    {let c=dice(16);
+        if(c==15){c=16;message_box.append(this.name+" rolled a crit");}
+        if(c<=x.defense){message_box.append("<p>ghost's attack was blocked</p>")}else{
+        let dmg = this.strength+dice(c);let temp="<p>"+this.name+ " hit "+x.name+" for "+dmg+" dmg.</p>";
+        message_box.append(temp);
+        x.hp = x.hp-dmg;}
     }
 };
 
 var zombie={
+    name:"zombie",
     hp:45,
-    constitution:60,
+    constitution:45,
     strength:1,
     defense:1,
     dexterity:3,
     magic:6,
     speed:3,
     attack:function(x)
-    {
-        let dmg = this.strength+dice(8);
-        x.hp= x.hp-dmg;
+    {let c=dice(16);
+        if(c==15){c=16;message_box.append(this.name+" rolled a crit");}
+        if(c<=x.defense){message_box.append("<p>zombie's attack was blocked</p>")}else{
+        let dmg = this.strength+dice(c);let temp="<p>"+this.name+ " hit "+x.name+" for "+dmg+" dmg.</p>";
+        message_box.append(temp);
+        x.hp = x.hp-dmg;}
     }
 };
 var rockgolem = {
-    hp:45,
+    name:"rock golem",
+    hp:60,
     constitution:60,
-    strength:1,
-    defense:1,
+    strength:3,
+    defense:3,
     dexterity:3,
     magic:6,
     speed:3,
     attack:function(x)
-    {
-        let dmg = this.strength+dice(8);
-        x.hp= x.hp-dmg;
+    {let c=dice(16);
+        if(c==15){c=16;message_box.append(this.name+" rolled a crit");}
+        if(c<=x.defense){message_box.append("<p>rock golem's attack was blocked</p>")}else{
+        let dmg = this.strength+dice(c);let temp="<p>"+this.name+ " hit "+x.name+" for "+dmg+" dmg.</p>";
+        message_box.append(temp);
+        x.hp = x.hp-dmg;}
     }
 
 };
@@ -466,7 +490,8 @@ var rockgolem = {
             console.log(choices);
             choices.push("leave");
             update_choices();
-            message_box.html("you smash the rock golem into a million pebbles");
+            player.defense+=3;
+            message_box.html("you smash the rock golem into a million pebbles<br> you make a shield from the remains *+3 defense*");
         }
 
     }
@@ -484,10 +509,11 @@ var rockgolem = {
     { 
         let roll = dice(active_enemies[dice(active_enemies.length)].hp);
         console.log(roll);
-        if(roll<=5){console.log("you flee");
+        if(roll<=5){console.log("you flee");b=0;
         rm_eventbox();}else{active_enemies[0].attack(player);}
         temp = "your hp: "+player.hp+"            enemy hp:"+ active_enemies[0].hp;
         animation_box.text(temp);
+        if(player.hp<=0){lose();}
     }
 
     function attack() 
@@ -575,7 +601,7 @@ var rockgolem = {
               // Move Buttons (Keyboard Left)
             case 37:
             if(!pcheck(player_position-1)){break;} 
-            $(playerposid).empty();
+             $(playerposid).empty();
              player_position--;
              playerposid="#pos"+player_position;
              $(playerposid).prepend(playersprite);
@@ -589,8 +615,10 @@ var rockgolem = {
                 $(temp).css({"background-color":"black"});
                 switch(e.which){
                     case 27: 
-                    rm_eventbox();
-                    event=false;
+                    //rm_eventbox();
+                    //event=false;
+                    //b=0;
+                    break;
                     //space key(will be used to select)
                     case 32:
                     handle_choice(temp);
