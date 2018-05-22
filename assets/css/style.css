@@ -10,11 +10,17 @@ div{height:5%;
 float:left;}
 .mountain{background-color: grey;
 z-index:0;}
-.water{background-color:blue;
+.water{background-image: url("../images/ocean.jpg");
+    /*background-size:100% 100%;*/
+    background-color:blue;
 z-index:0;}
-.grass{background-color:lightgreen;
+.grass{background-image:url("../images/grass.png");
+    background-size:100% 100%;
+    background-color:lightgreen;
     z-index:0;}
-.forest{background-color:green;
+.forest{background-image:url("../images/tree.png");
+    background-size:100% 100%;
+    background-color:green;
     z-index:0;}
 .trader1{background-color:brown;
     z-index:0;}
@@ -42,7 +48,8 @@ z-index:0;}
     z-index:0;}
 .port{background-color:brown;
     z-index:0;}
-.bridge{background-color:brown;
+.bridge{background-image:url("../images/bridge.jpg");
+    background-color:brown;
     z-index:0;}
 .playersprite{z-index:1;
                height:100%;
