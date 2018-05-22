@@ -37,28 +37,42 @@ var choices = new Array();
 var event_type=0;
 var active_enemies = new Array();
 var active_friends = new Array();
+var completed = new Array();
 var player= {
     name:"player name variable",
     hp:50,
     constitution:50,
-    strength:3,
+    strength:6,
     defense:1,
     dexterity:3,
     magic:1,
     speed:2,
     money:100,
     silversword:0,
+    ghost_form:false,
     book:false,
     attack:function(x)
-    {   let c=dice(16);
+    {   if(x.name=="ghost"&&this.silversword==0){message_box.append("you need a silver weapon to fight a ghost!");}
+        else{
+        let c=dice(16);
         if(c==15){c=16;message_box.append("you rolled a crit");}
         if(c<=x.defense){message_box.append("<p>your attack was blocked</p>")}else{
         let dmg = this.strength+dice(c);let temp="<p>you hit "+x.name+" for "+dmg+" dmg.</p>";
         message_box.append(temp);
-        x.hp = x.hp-dmg;}
+        x.hp = x.hp-dmg;}}
     },
-    necromancy()
-    {   let m;
+    ghostly: function()
+    {   message_box.append("you feel your spirit leave your body... but you are still of this world");
+        this.strength=1;
+        this.defense=1;
+        this.hp=45;
+        this.ghost_form=false;
+
+    },
+    necromancy:function()
+    {   let x;
+        let m;
+        message_box.append("this doesn't really work yet...<br> it will be useful once other mechanics have been implemented.<br>apologies for breaking the fourth wall here :p ");
     if(pirate.hp==0){
         pirate.hp=pirate.constitution;
         active_friends.push(pirate);
@@ -76,7 +90,8 @@ var player= {
     }
     if(m=true){player.book=false;}
 
-    },
+    }
+    
 
 };
 var pirate= {
@@ -159,7 +174,7 @@ var rockgolem = {
     hp:60,
     constitution:60,
     strength:3,
-    defense:3,
+    defense:4,
     dexterity:3,
     magic:6,
     speed:3,
@@ -257,7 +272,10 @@ var rockgolem = {
         let temp;
         for(let i=0;i<estate.length;i++)
         {
-            if(x==estate[i]){event_type=estateid[i];
+            if(x==estate[i]){
+                if(completed.some(arrVal => estateid[i] === arrVal)){console.log("completed")}
+                else{
+                event_type=estateid[i];
                 event=true;
                 event_screen();
                 choices.push("approach","leave");
@@ -267,7 +285,7 @@ var rockgolem = {
                 event_title.html(temp);
                 choice=0;
                 temp = "#choice0";
-                $(temp).css({"background-color":"teal"});
+                $(temp).css({"background-color":"teal"});}
                 }
         }
         
@@ -458,11 +476,13 @@ var rockgolem = {
             console.log(choices);
             choices.push("leave");
             update_choices();
-            message_box.html("you've bested the pirate and now you take his treasure!");
+            message_box.html("you've bested the pirate and now you take his treasure!<br> you take the pirates silver sword *needed for killing the undead*");
+            completed.push("pirate cove");
         }
 
         if(event_type=="necromancer's thicket")
-        {   player.book=true;
+        {   
+            player.book=true;
             active_enemies.length=0;
             choices.length=0;
             choice_box.empty();
@@ -470,18 +490,20 @@ var rockgolem = {
             choices.push("leave");
             update_choices();
             message_box.html("you've bested the necromancer and take his book!");
+            completed.push("necromancer's thicket");
             
         }
         if(event_type=="haunted graveyard")
         {
-            
+            if(!player.ghost_form){player.ghost_form=true;}
             active_enemies.length=0;
             choices.length=0;
             choice_box.empty();
             console.log(choices);
             choices.push("leave");
             update_choices();
-            message_box.html("you've put the restless spirit to rest");
+            completed.push("haunted graveyard");
+            message_box.html("you've put the restless spirit to rest<br> as the apparition vanishes, you feel a strange curse come over you.*when you die you will resurect as a ghost*");
         }
         if(event_type=="rock golem quary")
         {   
@@ -493,6 +515,7 @@ var rockgolem = {
             choices.push("leave");
             update_choices();
             player.defense+=3;
+            completed.push("rock golem quary");
             message_box.html("you smash the rock golem into a million pebbles<br> you make a shield from the remains *+3 defense*");
         }
 
@@ -511,11 +534,11 @@ var rockgolem = {
     { 
         let roll = dice(active_enemies[dice(active_enemies.length)].hp);
         console.log(roll);
-        if(roll<=5){console.log("you flee");b=0;
+        if(roll<=5){console.log("you flee");b=0;active_enemies.length=0;
         rm_eventbox();}else{active_enemies[0].attack(player);}
         temp = "your hp: "+player.hp+"            enemy hp:"+ active_enemies[0].hp;
         animation_box.text(temp);
-        if(player.hp<=0){lose();}
+        if(player.hp<=0){if(player.ghost_form){player.ghostly();}else{lose();}}
     }
 
     function attack() 
@@ -525,13 +548,13 @@ var rockgolem = {
         if(active_enemies[0].hp>0){active_enemies[0].attack(player);}
         temp = "your hp: "+player.hp+"            enemies hp:"+ active_enemies[0].hp;
         if(active_enemies[0].hp<1){active_enemies[0].hp=0;win();}
-        if(player.hp<1){player.hp=0;lose();}
+        if(player.hp<1){if(player.ghost_form){player.ghostly();}else{player.hp=0;lose();}}
         animation_box.text(temp);
     }
-    function hpbar()
+    /*function hpbar()
     {   
 
-    }
+    }*/
     function healer()
     {   choices.length=0;
         choices.push("purchase healing","leave");
@@ -661,13 +684,13 @@ var rockgolem = {
           });
 
 
-//why isn't this working? 
+/*
     $(".choice_text").on("click", function(){
         let m = $(this).text();
         console.log(m);
         handle_choice(m);
 
-    });
+    });*/
     //function for interacting, pull up large ... absolute pos div that acts as game screen
         //get key or button input to talk, fight, and interact with the scenario
         //wire buttons to game logic*rolls damage etc*
