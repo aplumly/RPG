@@ -187,7 +187,7 @@ var rockgolem = {
         var pixel = $("<div>");
         pixel.addClass(pixels[i]);
         pixel.attr("data-number",i);
-        pixel.text(pixel.attr("data-number"))
+        //pixel.text(pixel.attr("data-number"))
         pixel.attr("id","pos"+i);
         $("body").append(pixel);
     }
