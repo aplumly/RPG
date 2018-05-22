@@ -75,6 +75,7 @@ for y in range(20):
 print(a)            
 fil.close()
 '''
+'''
 from PIL import Image
 
 m=(127,127,127)
@@ -142,5 +143,37 @@ for y in range(20):
             fil.write("\"trader2\",")
         if pix[x,y]==c:
             fil.write("\"cave\",")
+print(a)            
+fil.close()
+'''
+
+
+
+from PIL import Image
+
+w=(127,127,127)
+g=(195,195,195)
+c=(0,0,0)
+chest=(185,122,87)
+key=(255,201,14)
+
+fil = open("cavearray.map","w+")
+a=0
+img = Image.open('cave.png')
+pix = img.load()
+print(pix[20,1])
+for y in range(20):
+    for x in range(40):
+        a=a+1
+        if pix[x,y]==w:
+            fil.write("\"wall\",")
+        if pix[x,y]==g:
+            fil.write("\"ground\",")
+        if pix[x,y]==chest:
+            fil.write("\"chest\",")
+        if pix[x,y]==c:
+            fil.write("\"cave_entrance\",")
+        if pix[x,y]==key:
+            fil.write("\"key\",")
 print(a)            
 fil.close()

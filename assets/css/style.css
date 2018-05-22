@@ -10,7 +10,7 @@ div{height:5%;
 float:left;}
 .mountain{background-color: grey;
 z-index:0;}
-.water{background-image: url("../images/ocean.jpg");
+.water{background-image: url("../images/water.png");
     /*background-size:100% 100%;*/
     background-color:blue;
 z-index:0;}
@@ -28,7 +28,9 @@ z-index:0;}
     z-index:0;}
 .cave{background-color:black;
     z-index:0;}
-.river{background-color:lightblue;
+.river{background-image: url("../images/river.jpg");
+    background-size:100% 100%;
+    background-color:lightblue;
     z-index:0;}
 .pirate{background-color:red;
     z-index:0;}
@@ -42,7 +44,8 @@ z-index:0;}
     z-index:0;}
 .sidequest{background-color:lavender;
     z-index:0;}
-.healer{background-color:yellow;
+.healer{background-image:url("../images/healer.jpg");
+    background-size: 100% 100%;
     z-index:0;}
 .playerstart{background-color:pink;
     z-index:0;}
@@ -51,6 +54,16 @@ z-index:0;}
 .bridge{background-image:url("../images/bridge.jpg");
     background-color:brown;
     z-index:0;}
+.wall{background-color:grey;
+z-index: 0;}
+.ground{background-color:lightgray;
+z-index:0;}
+.key{background-color:yellow;
+z-index: 0;}
+.chest{background-color:brown;
+z-index: 0;}
+.cave_entrance{background-color:orange;
+z-index:0;}
 .playersprite{z-index:1;
                height:100%;
             width: 80%;

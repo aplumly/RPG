@@ -21,8 +21,8 @@ COMBAT MECHANICS
     *defense
     *constitution
     *magic
--if random number=0 attack misses
--defense roll... if roll is = last random number then block is successful
+-if random number less attack misses
+-defense roll... 
     *if defense is higher than 1, roll again for each level.
 -mele base hit is determined by strength
 -archery base hit is determined by dexterity
@@ -32,5 +32,11 @@ COMBAT MECHANICS
 
 
     
-
+todo
+-get 4 way combat working
+-implement necromancy/magic/special attacks
+-create cave maze... there is a key in the middle... make a torch mechanic that lights up only 3 squares in front/behind side to side and walls block light.
+-create quest and side quest dialogue
+-cool items to buy at traders
+-get port/sailing working
 
