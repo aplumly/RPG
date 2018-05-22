@@ -156,7 +156,7 @@ g=(195,195,195)
 c=(0,0,0)
 chest=(185,122,87)
 key=(255,201,14)
-
+door=(255,174,201)
 fil = open("cavearray.map","w+")
 a=0
 img = Image.open('cave.png')
@@ -164,16 +164,19 @@ pix = img.load()
 print(pix[20,1])
 for y in range(20):
     for x in range(40):
-        a=a+1
         if pix[x,y]==w:
             fil.write("\"wall\",")
         if pix[x,y]==g:
             fil.write("\"ground\",")
         if pix[x,y]==chest:
-            fil.write("\"chest\",")
+            fil.write("\"boss"+str(a)+"\",")
+            a=a+1
         if pix[x,y]==c:
             fil.write("\"cave_entrance\",")
         if pix[x,y]==key:
-            fil.write("\"key\",")
+            fil.write("\"caveking\",")
+        if pix[x,y]==door:
+            fil.write("\"cave_door\",")
+    
 print(a)            
 fil.close()

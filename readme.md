@@ -35,7 +35,7 @@ COMBAT MECHANICS
 todo
 -get 4 way combat working
 -implement necromancy/magic/special attacks
--create cave maze... there is a key in the middle... make a torch mechanic that lights up only 3 squares in front/behind side to side and walls block light.
+-create cave maze... there are 5 bosses, after the 4 outside bosses are beated, a wall in the maze opens up and reveals the final caveboss... make a torch mechanic that lights up only 3 squares in front/behind side to side and walls block light.
 -create quest and side quest dialogue
 -cool items to buy at traders
 -get port/sailing working
