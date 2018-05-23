@@ -210,6 +210,9 @@ var rockgolem = {
 }
 
 draw_map(pixels);
+
+
+
 var playersprite;
     //spawn player
     function spawn_player(x){
@@ -699,7 +702,8 @@ var playersprite;
             
 
           });
-
+          alert("use the arrow keys to move... when an event box is open press space to select. this is a work in progress and therefore has bugs/blank event screens/etc... feel free to contribute any ideas you may have");
+          player.name=prompt("enter your name");
 
 /*
     $(".choice_text").on("click", function(){
